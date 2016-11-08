@@ -59,7 +59,7 @@
     
     
     //默认第一个按钮显示
-    [self scrollViewDidScroll:self.scrollV];
+    [self scrollViewDidEndDecelerating:self.scrollV];
 
 }
 
@@ -125,17 +125,20 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-//只要scrollView滑动就会调用
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self scrollViewDidEndScrollingAnimation:scrollView];
+}
+
+//自身结束滚动之后调用的方法
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     //移除之前的添加过得view
     [self.showIngVc.view removeFromSuperview];
     
     //还原之前按钮的字体大小和字体颜色
     self.goalBtn.titleLabel.font = [UIFont systemFontOfSize:self.btnTitleDefaultFont];
     [self.goalBtn setTitleColor:self.btnTitleDefaultColor forState:UIControlStateNormal];
-
-
+    
+    
     //偏移量的索引
     NSInteger index = scrollView.contentOffset.x/MainScreen_size_width;
     
@@ -145,7 +148,7 @@
     [goalBtn setTitleColor:self.btnTitleSelectedColor forState:UIControlStateNormal];
     self.goalBtn = goalBtn;
     
-
+    
     UIViewController *indexCtr = self.childrenContentCtr[index];
     
     //显示当前的控制器
@@ -163,8 +166,7 @@
         self.lineV.frame = rect;
     }];
 
+    
 }
-
-
 
 @end
