@@ -84,9 +84,20 @@
         [self.titleContentV addSubview:btn];
         
         //lineView
-        self.lineV.frame = CGRectMake(space, H, btn.width, 2);
-        self.lineV.backgroundColor = self.lineViewColor;
-        [self.typeContentView addSubview:self.lineV];
+        if (i == 0) {
+            [btn.titleLabel sizeToFit];
+            [btn layoutIfNeeded];
+            self.lineV.frame = CGRectMake(0, H, btn.titleLabel.width, 2);
+            
+            self.lineV.centerX = btn.centerX;
+            
+            self.lineV.backgroundColor = self.lineViewColor;
+            [self.typeContentView addSubview:self.lineV];
+        }
+
+//        self.lineV.frame = CGRectMake(space, H, btn.width, 2);
+//        self.lineV.backgroundColor = self.lineViewColor;
+//        [self.typeContentView addSubview:self.lineV];
     }
     
 }
@@ -161,10 +172,10 @@
     
     //lineView 的坐标
     [UIView animateWithDuration:0.5 animations:^{
-        CGRect rect = self.lineV.frame;
-        rect.origin.x = goalBtn.origin.x;
-        self.lineV.frame = rect;
-    }];
+        [goalBtn.titleLabel sizeToFit];
+        [goalBtn.titleLabel layoutIfNeeded];
+        self.lineV.width = goalBtn.titleLabel.width;
+        self.lineV.centerX = goalBtn.centerX;    }];
 
     
 }

@@ -28,7 +28,7 @@
     ShopCityCtr *vc = [ShopCityCtr new];
     
     //title
-    vc.titleArr = @[@"1",@"2",@"3",@"4",@"5"];
+    vc.titleArr = @[@"11111",@"2222",@"333",@"44",@"5"];
     
     //子控制器
     OneCtr *one =[OneCtr new];
